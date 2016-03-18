@@ -1,10 +1,7 @@
-import json
-import sys
-
 from adapt.intent import IntentBuilder
 from adapt.engine import IntentDeterminationEngine
 
-class input_engine:
+class navigation_engine:
     def __init__(self):
         self.engine = IntentDeterminationEngine()
         navigation_keywords = [
@@ -53,13 +50,3 @@ class input_engine:
             if intent.get("confidence") > 0 and intent.get("intent_type") == "NavigationIntent":
                 return intent
         return None
-
-if __name__ == "__main__":
-    input_engine = input_engine()
-    while True:
-        string = input("What do you want to do?\n")
-        intent = input_engine.get_intent(string)
-        if not intent == None:
-            print(intent.get("NavigationKeyword"), "ing ", intent.get("NavigationDirection"), sep="")
-            if not intent.get("NavigationObject") == None:
-                print("Dealing with", intent.get("NavigationObject"))
